@@ -29,3 +29,27 @@ A execução foi desenhada para ser modular e reproduzível. Para testar o pipel
 - **Delta Lake:** Versionamento (Time Travel), idempotência e evolução de schema.
 - **Unity Catalog:** Governança e controle de acesso.
 - **Git Flow & Conventional Commits:** Controle de versão estruturado.
+
+## 📸 Evidências de Execução
+
+As evidências de execução e validação das regras de qualidade (testes unitários em PySpark bloqueando CPFs nulos na camada Silver) foram registradas e estão disponíveis no repositório.
+* **Teste de Transformação (Silver):** `docs/evidencia_teste_silver.png` *(ou ajuste o caminho da pasta onde você salvou a imagem)*
+
+---
+
+## ⚖️ Trade-offs e Decisões de Arquitetura
+
+Neste desafio, o foco foi demonstrar domínio sobre a arquitetura Medallion e engenharia de software aplicada a dados (Git Flow, versionamento e testes). Algumas escolhas foram feitas para balancear a entrega técnica em um ambiente de demonstração versus um cenário real de produção em larga escala:
+
+**1. O que foi implementado (Escopo do Desafio):**
+* **Carga Batch Simulada:** A ingestão de dados foi construída utilizando leitura estática para validar a lógica de transformação na camada Silver e as agregações analíticas na Gold de forma reprodutível.
+* **Qualidade de Dados Local:** Implementação de testes baseados em PySpark (asserts nativos) simulando um ambiente de CI para validação de regras (ex: bloqueio de registros com CPF nulo).
+* **Governança via Código:** Aplicação de regras de qualidade de dados de forma programática (PySpark) na camada Silver.
+
+**2. O que ficou como Desenho/Conceito:**
+* **Orquestração e Triggers:** O fluxo de dependência entre Bronze, Silver e Gold está modularizado logicamente, mas a orquestração oficial (via Databricks Workflows/Jobs ou Apache Airflow) foi documentada arquiteturalmente, sem agendamento ativo.
+
+**3. O que seria feito em um Ambiente de Produção (Cenário Real):**
+* **Ingestão Contínua (Databricks Auto Loader):** Em um ambiente produtivo, a camada Bronze utilizaria o Auto Loader (`cloudFiles`) para detectar novos arquivos no data lake de forma contínua e incremental, otimizando custos e latência em comparação ao batch tradicional.
+* **Delta Live Tables (DLT):** A governança da camada Silver seria migrada para as *Expectations* do DLT (`@dlt.expect_or_drop`), permitindo monitoramento visual da qualidade, quarentena automática de dados ruins e linhagem nativa no Unity Catalog.
+* **CI/CD Automatizado:** A esteira contaria com GitHub Actions ou Azure DevOps rodando os testes automatizados a cada *Pull Request* para a branch `develop`, além de realizar o *deploy* dos notebooks nos *workspaces* (Dev, QA, Prod).
