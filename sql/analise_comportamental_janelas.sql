@@ -1,6 +1,5 @@
 -- =====================================================================
--- ANÁLISE COMPORTAMENTAL AVANÇADA COM FIRST_VALUE E LAST_VALUE
--- Requisito do Desafio: Uso de funções analíticas de janela obrigatórias
+-- ANÁLISE COM FIRST_VALUE E LAST_VALUE
 -- =====================================================================
 
 WITH transacoes_com_cliente AS (

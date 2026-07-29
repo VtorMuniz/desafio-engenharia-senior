@@ -1,6 +1,6 @@
 # Data Product Lakehouse - Cooperativa NovaRota
 
-Este repositório contém a solução do desafio técnico para Engenharia de Dados (Nível Sênior), focado em construir um produto de dados transacional e analítico utilizando Databricks, Delta Lake e arquitetura Medallion.
+Este repositório contém a solução do desafio técnico para Engenharia de Dados, focado em construir um produto de dados transacional e analítico utilizando Databricks, Delta Lake e arquitetura Medallion.
 
 ## 🚀 Como Executar o Projeto
 
@@ -65,7 +65,7 @@ As evidências de execução da suíte completa de testes de qualidade rodando d
 
 ## ⚖️ Trade-offs e Decisões de Arquitetura
 
-Neste desafio, o foco foi demonstrar domínio sobre a arquitetura Medallion e engenharia de software aplicada a dados (Git Flow, versionamento estruturado e testes unitários independentes). Algumas escolhas foram feitas para balancear a entrega técnica em um ambiente de demonstração versus um cenário real de produção em larga escala:
+Neste desafio, o foco foi demonstrar domínio sobre a arquitetura Medallion e engenharia de software aplicada a dados (Git Flow, versionamento estruturado e testes unitários independentes). Algumas escolhas foram feitas para balancear a entrega técnica em um ambiente de demonstração versus um cenário real de produção:
 
 **1. O que foi implementado (Escopo do Desafio):**
 - **Carga Batch Simulada:** A ingestão de dados foi construída utilizando leitura estática para validar a lógica de transformação na camada Silver e as agregações analíticas na Gold de forma reprodutível.
